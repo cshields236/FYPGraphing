@@ -4,6 +4,13 @@ from firebase_admin import firestore
 
 cred = credentials.ApplicationDefault()
 faces = []
+f = []
+
+rightEyes = []
+leftEyes = []
+times = []
+
+
 
 cred = credentials.Certificate("C:/Users/Conor's Laptop/Downloads/FYPFirebaseProject-fbd67ba91d2b.json")
 firebase_admin.initialize_app(cred)
@@ -15,8 +22,15 @@ users_ref = db.collection(u'users/oW2ia7qAHWdxwVhpN1g8xaufKKx1/Journeys')
 docs = users_ref.stream()
 
 for doc in docs:
-    # print(u'{} => {}'.format(doc.id, doc.to_dict()))
     faces.append(doc.to_dict())
+    
+for face in faces:
+    f.append(face['journeyInformationss'])
 
-print (faces[2])
+# print(f[365])
+for i in range(360):
+    rightEyes.append(f[i][0]['rightEye'])
+    times.append(f[i][0]['time'])
 
+
+print(len(rightEyes))
