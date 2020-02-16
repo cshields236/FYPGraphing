@@ -1,6 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+from matplotlib import pyplot as plt
 
 cred = credentials.ApplicationDefault()
 faces = []
@@ -28,9 +29,14 @@ for face in faces:
     f.append(face['journeyInformationss'])
 
 # print(f[365])
-for i in range(360):
-    rightEyes.append(f[i][0]['rightEye'])
-    times.append(f[i][0]['time'])
+for i in range(30):
+    rightEyes.append(f[i][0]['rightEye'] * 100)
+    times.append(f[i][0]['time'].split(" ")[1])
 
 
-print(len(rightEyes))
+
+plt.title('Blinking Patterns')
+plt.ylabel('Eye Open %')
+plt.xlabel('Time')
+plt.plot(times, rightEyes)
+plt.show()
