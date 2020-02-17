@@ -19,7 +19,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
-users_ref = db.collection(u'users/oW2ia7qAHWdxwVhpN1g8xaufKKx1/Journeys')
+users_ref = db.collection(u'users/bz07ycVA6TQtTZRPOn3zeBqEfsc2/Journeys')
 docs = users_ref.stream()
 
 for doc in docs:
@@ -31,12 +31,16 @@ for face in faces:
 # print(f[365])
 for i in range(30):
     rightEyes.append(f[i][0]['rightEye'] * 100)
+    leftEyes.append(f[i][0]['leftEye'] * 100)
     times.append(f[i][0]['time'].split(" ")[1])
 
 
 
+plt.style.use('fivethirtyeight')
 plt.title('Blinking Patterns')
 plt.ylabel('Eye Open %')
 plt.xlabel('Time')
-plt.plot(times, rightEyes)
+plt.plot(times, rightEyes,color='b', label = 'Right Eye')
+plt.plot(times, leftEyes,color = 'k' , label = 'Left Eye')
+plt.legend()
 plt.show()
